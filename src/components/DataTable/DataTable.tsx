@@ -44,7 +44,7 @@ interface DataTableProps<T = any> {
   hoverable?: boolean;
 }
 
-function DataTable<T = any>({
+function DataTable<T extends Record<string, any> = any>({
   data,
   columns,
   loading = false,
@@ -78,12 +78,17 @@ function DataTable<T = any>({
   const tableRef = useRef<HTMLDivElement>(null);
 
   // Get row key function
-  const getRowKey = useCallback((record: T, index: number): string | number => {
-    if (typeof rowKey === 'function') {
-      return rowKey(record);
-    }
-    return record[rowKey] || index;
-  }, [rowKey]);
+const getRowKey = useCallback((record: T, index: number): string | number => {
+  if (typeof rowKey === 'function') {
+    return rowKey(record);
+  }
+  const key = record[rowKey];
+  if (key == null) {
+    console.warn(`Row is missing key "${String(rowKey)}". Using index as fallback, which may cause issues.`);
+    return `row-${index}`; // Make fallback more unique
+  }
+  return typeof key === 'string' || typeof key === 'number' ? key : String(key);
+}, [rowKey]);
 
   // Filter data based on search term
   const filteredData = useMemo(() => {
@@ -103,8 +108,8 @@ function DataTable<T = any>({
     if (!sortInfo) return filteredData;
 
     return [...filteredData].sort((a, b) => {
-      const aVal = a[sortInfo.field];
-      const bVal = b[sortInfo.field];
+      const aVal = (a as Record<string, any>)[sortInfo.field];
+      const bVal = (b as Record<string, any>)[sortInfo.field];
       
       if (aVal == null && bVal == null) return 0;
       if (aVal == null) return sortInfo.order === 'asc' ? -1 : 1;
@@ -338,7 +343,7 @@ function DataTable<T = any>({
                 </th>
               )}
               
-              {columns.map((column, index) => (
+              {columns.map((column) => (
                 <th
                   key={String(column.key)}
                   className={`data-table__header-cell ${column.className || ''}`}

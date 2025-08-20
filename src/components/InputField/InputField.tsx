@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect, forwardRef } from 'react';
 import { Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
-import { InputFieldProps, ValidationRule } from '../../types';
+import { InputFieldProps } from '../../types';
 import './InputField.css';
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(({

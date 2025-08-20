@@ -168,7 +168,7 @@ function App() {
   ];
 
   // Handle selection change
-  const handleSelectionChange = (selectedRows: UserType[], selectedRowKeys: (string | number)[]) => {
+  const handleSelectionChange = (selectedRows: UserType[]) => {
     setSelectedUsers(selectedRows);
     console.log('Selected users:', selectedRows);
   };
@@ -402,7 +402,7 @@ function App() {
                   data={mockUsers.slice(0, 5)}
                   columns={columns.slice(0, 4)}
                   size="sm"
-                  pagination={false}
+                  // pagination={false}
                   searchable={false}
                   exportable={false}
                 />
@@ -415,7 +415,7 @@ function App() {
                   columns={columns.slice(0, 3)}
                   size="lg"
                   loading
-                  pagination={false}
+                  // pagination={false}
                   searchable={false}
                   exportable={false}
                 />
@@ -429,7 +429,7 @@ function App() {
                   bordered={false}
                   striped={false}
                   hoverable={false}
-                  pagination={false}
+                  // pagination={false}
                   searchable={false}
                   exportable={false}
                   selectable={false}

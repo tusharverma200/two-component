@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DataTable from '../DataTable';
@@ -17,6 +17,10 @@ const mockColumns: Column[] = [
 ];
 
 describe('DataTable', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('renders table with data', () => {
     render(<DataTable data={mockData} columns={mockColumns} />);
 
@@ -59,7 +63,7 @@ describe('DataTable', () => {
   });
 
   it('handles search functionality', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     
     render(<DataTable data={mockData} columns={mockColumns} searchable />);
 
@@ -71,7 +75,7 @@ describe('DataTable', () => {
   });
 
   it('handles sorting', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handleSort = vi.fn();
     
     render(
@@ -93,7 +97,7 @@ describe('DataTable', () => {
   });
 
   it('handles row selection', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handleSelection = vi.fn();
     
     render(
@@ -115,7 +119,7 @@ describe('DataTable', () => {
   });
 
   it('handles select all functionality', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handleSelection = vi.fn();
     
     render(
@@ -155,7 +159,7 @@ describe('DataTable', () => {
   });
 
   it('handles page size change', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handlePageChange = vi.fn();
     
     render(
@@ -179,7 +183,7 @@ describe('DataTable', () => {
   });
 
   it('handles export functionality', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handleExport = vi.fn();
     
     render(
@@ -198,7 +202,7 @@ describe('DataTable', () => {
   });
 
   it('renders action buttons', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     const handleAction = vi.fn();
     
     const actions = [

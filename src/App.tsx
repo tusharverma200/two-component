@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, User, Eye, Edit, Trash2, Building, Calendar } from 'lucide-react';
+import { Mail, User, Eye, Edit, Trash2, Building2, Calendar } from 'lucide-react';
 import InputField from './components/InputField';
 import DataTable from './components/DataTable';
 import { mockUsers } from './data/mockData';
@@ -116,7 +116,7 @@ function App() {
       sortable: true,
       render: (value) => (
         <div className="user-department">
-          <Building size={14} />
+          <Building2 size={14} />
           <span>{value}</span>
         </div>
       )

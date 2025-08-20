@@ -4,6 +4,7 @@
   box-shadow: var(--shadow);
   overflow: hidden;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Toolbar */

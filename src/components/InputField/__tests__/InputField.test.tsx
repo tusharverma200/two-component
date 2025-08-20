@@ -1,15 +1,18 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import InputField from '../InputField';
 
 describe('InputField', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('renders with basic props', () => {
     render(
       <InputField
         label="Test Label"
         placeholder="Test placeholder"
-        data-testid="input-field"
       />
     );
 
@@ -29,7 +32,7 @@ describe('InputField', () => {
     render(
       <InputField
         label="Controlled Input"
-        value="initial"
+        value=""
         onChange={handleChange}
       />
     );
@@ -38,7 +41,7 @@ describe('InputField', () => {
     await user.clear(input);
     await user.type(input, 'new value');
 
-    expect(handleChange).toHaveBeenCalled();
+    expect(handleChange).toHaveBeenCalledTimes(9); // 'new value' = 9 characters
   });
 
   it('validates required field', async () => {
@@ -155,10 +158,9 @@ describe('InputField', () => {
       <InputField
         label="Custom Class"
         className="custom-input"
-        data-testid="input-container"
       />
     );
-    const container = screen.getByTestId('input-container');
+    const container = screen.getByLabelText('Custom Class').closest('.input-field');
     expect(container).toHaveClass('custom-input');
   });
 
@@ -176,25 +178,25 @@ describe('InputField', () => {
 
   it('handles different sizes', () => {
     const { rerender } = render(
-      <InputField label="Size Test" size="sm" data-testid="container" />
+      <InputField label="Size Test" size="sm" />
     );
-    expect(screen.getByTestId('container')).toHaveClass('input-field--sm');
+    expect(screen.getByLabelText('Size Test').closest('.input-field')).toHaveClass('input-field--sm');
 
     rerender(
-      <InputField label="Size Test" size="lg" data-testid="container" />
+      <InputField label="Size Test" size="lg" />
     );
-    expect(screen.getByTestId('container')).toHaveClass('input-field--lg');
+    expect(screen.getByLabelText('Size Test').closest('.input-field')).toHaveClass('input-field--lg');
   });
 
   it('handles different variants', () => {
     const { rerender } = render(
-      <InputField label="Variant Test" variant="outline" data-testid="container" />
+      <InputField label="Variant Test" variant="outline" />
     );
-    expect(screen.getByTestId('container')).toHaveClass('input-field--outline');
+    expect(screen.getByLabelText('Variant Test').closest('.input-field')).toHaveClass('input-field--outline');
 
     rerender(
-      <InputField label="Variant Test" variant="filled" data-testid="container" />
+      <InputField label="Variant Test" variant="filled" />
     );
-    expect(screen.getByTestId('container')).toHaveClass('input-field--filled');
+    expect(screen.getByLabelText('Variant Test').closest('.input-field')).toHaveClass('input-field--filled');
   });
 });

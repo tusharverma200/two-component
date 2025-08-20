@@ -1,6 +1,7 @@
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-50) 100%);
+  box-sizing: border-box;
 }
 
 .app-header {
@@ -9,6 +10,7 @@
   background: white;
   border-bottom: 1px solid var(--gray-200);
   margin-bottom: 32px;
+  box-sizing: border-box;
 }
 
 .app-title {
@@ -34,6 +36,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px 48px;
+  box-sizing: border-box;
 }
 
 .demo-section {

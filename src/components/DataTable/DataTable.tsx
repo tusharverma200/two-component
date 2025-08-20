@@ -4,7 +4,7 @@ import {
   ChevronDown,
   Search,
   Download,
-  Filter,
+  SlidersHorizontal,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -272,7 +272,7 @@ function DataTable<T = any>({
             
             {filterable && (
               <button className="data-table__filter-button">
-                <Filter size={16} />
+                <SlidersHorizontal size={16} />
                 Filters
               </button>
             )}

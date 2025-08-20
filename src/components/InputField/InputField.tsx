@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect, forwardRef } from 'react';
-import { Eye, EyeOff, AlertCircle, Check } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
 import { InputFieldProps, ValidationRule } from '../../types';
 import './InputField.css';
 
@@ -227,7 +227,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(({
           
           {isValid && (
             <div className="input-field__success-icon">
-              <Check size={16} />
+              <CheckCircle size={16} />
             </div>
           )}
         </div>
